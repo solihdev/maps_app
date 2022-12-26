@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mapping_app/ui/splash_screen/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,10 +10,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Mapping App',
       debugShowCheckedModeBanner: false,
-      home: Container(),
+      home: SplashScreen(),
     );
   }
 }
