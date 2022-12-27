@@ -16,6 +16,7 @@ dependencies:
   json_serializable: ^6.5.4
   dio: ^4.0.6
   dropdown_search: ^5.0.5
+  lottie: ^2.1.0
 
   #mapping packages
   location: ^4.4.0
@@ -31,4 +32,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/images/
+    - assets/lotties/
+    - assets/icons/
