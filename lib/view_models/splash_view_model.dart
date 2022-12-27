@@ -5,6 +5,7 @@ import 'package:mapping_app/data/models/lat_long.dart';
 class SplashViewModel extends ChangeNotifier {
   SplashViewModel() {
     fetchCurrentLocation();
+    listenCurrentLocation();
   }
 
   LatLong? latLong;
@@ -17,8 +18,6 @@ class SplashViewModel extends ChangeNotifier {
 
   Future<void> fetchCurrentLocation() async {
     //1-qadam location enable yoki disable ekanini tekshiradi!
-    await Future.delayed(const Duration(seconds: 3));
-
     _serviceEnabled = await location.serviceEnabled();
 
     if (!_serviceEnabled) {
@@ -44,5 +43,14 @@ class SplashViewModel extends ChangeNotifier {
       longitude: _locationData!.latitude!,
     );
     notifyListeners();
+    await Future.delayed(const Duration(seconds: 3));
+  }
+
+  listenCurrentLocation() {
+    location.onLocationChanged.listen((event) {
+      print(
+        "LOCATION CHANGED : ${event.latitude}, ${event.longitude}",
+      );
+    });
   }
 }

@@ -27,8 +27,21 @@ class _SplashScreenState extends State<SplashScreen> {
                           MapScreen(latLong: viewModel.latLong!),
                     ));
               }
-              return const Center(
-                child: Text("Splash Screen"),
+              return Center(
+                child: SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Splash Screen"),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Text("Map"),
+                      ),
+                    ],
+                  ),
+                ),
               );
             },
           ),
