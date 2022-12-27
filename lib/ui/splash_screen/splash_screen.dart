@@ -19,14 +19,6 @@ class _SplashScreenState extends State<SplashScreen> {
         return Scaffold(
           body: Consumer<SplashViewModel>(
             builder: (context, viewModel, child) {
-              if (viewModel.latLong != null) {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          MapScreen(latLong: viewModel.latLong!),
-                    ));
-              }
               return Center(
                 child: SizedBox(
                   width: double.infinity,
@@ -36,7 +28,16 @@ class _SplashScreenState extends State<SplashScreen> {
                     children: [
                       const Text("Splash Screen"),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (viewModel.latLong != null) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      MapScreen(latLong: viewModel.latLong!),
+                                ));
+                          }
+                        },
                         child: const Text("Map"),
                       ),
                     ],

@@ -1,11 +1,11 @@
 class LatLong{
 
   LatLong({
-    required this.lattitude,
     required this.longitude,
+    required this.lattitude,
 });
-
-  double lattitude;
+  
   double longitude;
+  double lattitude;
 
 }

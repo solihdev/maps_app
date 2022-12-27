@@ -7,7 +7,7 @@ class GeoCodingRepository {
   final ApiService apiService;
 
   Future<String> getAddress(LatLong latLong, String kind) => apiService.getLocationName(
-        geoCodeText: "${latLong.longitude},${latLong.lattitude}",
+        geoCodeText: "${latLong.lattitude},${latLong.longitude}",
         kind: kind,
       );
 }

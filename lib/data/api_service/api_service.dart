@@ -1,36 +1,39 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:mapping_app/data/geocoding/geocoding.dart';
+import 'package:flutter/foundation.dart';
+
 import '../../utils/constants.dart';
+import '../geocoding/geocoding.dart';
 import 'api_client.dart';
 
 class ApiService extends ApiClient {
-  Future<String> getLocationName({required String geoCodeText,required String kind}) async {
+  Future<String> getLocationName({required String geoCodeText, required String kind}) async {
+    String text = '';
     try {
       late Response response;
       Map<String, String> queryParams = {
-        'api': mapApiKey,
+        'apikey': mapApiKey,
         'geocode': geoCodeText,
-        'lang': 'uz_Uz',
+        'lang': 'uz_UZ',
         'format': 'json',
         'kind': kind,
         'rspn': '1',
-        'result': '1',
+        'results': '1',
       };
-      debugPrint("QueryParams>>>>>>>>>$queryParams");
+      debugPrint("QueryParams>>>>>>>>>>$queryParams");
       response = await dio.get(
-        "${dio.options.baseUrl}/",
+        dio.options.baseUrl,
         queryParameters: queryParams,
       );
-      String text = '';
-      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+
+      if (response.statusCode! == HttpStatus.ok) {
         Geocoding geocoding = Geocoding.fromJson(response.data);
         if (geocoding.response.geoObjectCollection.featureMember.isNotEmpty) {
           text = geocoding.response.geoObjectCollection.featureMember[0]
               .geoObject.metaDataProperty.geocoderMetaData.text;
-          debugPrint("text>>>>>>>>>>> $text");
+          debugPrint("text>>>>>>>>>>>> $text");
         } else {
-          text = "Aniqlanmagan hudud";
+          text = 'Aniqlanmagan hudud';
         }
         return text;
       } else {
