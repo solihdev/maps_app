@@ -24,9 +24,16 @@ class _MapScreenState extends State<MapScreen> {
       builder: (context, child) {
         return Scaffold(
           appBar: AppBar(
-            title:
-                Text("${widget.latLong.lattitude} ${widget.latLong.longitude}"),
-          ),
+              title: const Text("Map Screen"),
+              actions: [
+                IconButton(
+                    icon: const Icon(Icons.refresh),
+                    onPressed: () {
+                      context
+                          .read<MapViewModel>()
+                          .fetchAddress(latLong: widget.latLong, kind: "house");
+                    }),
+              ]),
           body: Consumer<MapViewModel>(
             builder: (context, viewModel, child) {
               return Center(
@@ -34,23 +41,12 @@ class _MapScreenState extends State<MapScreen> {
                   width: double.infinity,
                   height: double.infinity,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "Map Screen: ${viewModel.addressText}",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 27,
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          context.read<MapViewModel>().fetchAddress(
-                              latLong: widget.latLong, kind: "house");
-                        },
-                        child: const Text("Map"),
-                      ),
-                      Expanded(
+                      SizedBox(
+                        width: double.infinity,
+                        height: 690,
                         child: GoogleMap(
                           mapType: MapType.hybrid,
                           onMapCreated: (GoogleMapController controller) {},
@@ -58,6 +54,16 @@ class _MapScreenState extends State<MapScreen> {
                               target: LatLng(widget.latLong.longitude,
                                   widget.latLong.lattitude),
                               zoom: 19.151926040649414),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          viewModel.addressText,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                          ),
                         ),
                       ),
                     ],
