@@ -53,7 +53,7 @@ class _MapScreenState extends State<MapScreen> {
                           initialCameraPosition: CameraPosition(
                               target: LatLng(widget.latLong.longitude,
                                   widget.latLong.lattitude),
-                              zoom: 19.151926040649414),
+                              zoom: 16),
                         ),
                       ),
                       Padding(
