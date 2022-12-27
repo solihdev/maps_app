@@ -5,7 +5,7 @@ import '../../utils/constants.dart';
 import 'api_client.dart';
 
 class ApiService extends ApiClient {
-  Future<String> getLocationName(String geoCodeText) async {
+  Future<String> getLocationName({required String geoCodeText,required String kind}) async {
     try {
       late Response response;
       Map<String, String> queryParams = {
@@ -13,7 +13,7 @@ class ApiService extends ApiClient {
         'geocode': geoCodeText,
         'lang': 'uz_Uz',
         'format': 'json',
-        'kind': 'house',
+        'kind': kind,
         'rspn': '1',
         'result': '1',
       };

@@ -6,7 +6,7 @@ import '../../data/api_service/api_service.dart';
 import '../../data/repositories/geocoding_repository.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({Key? key, required this.latLong}) : super(key: key);
+   const MapScreen({Key? key, required this.latLong}) : super(key: key);
 
   final LatLong latLong;
 
@@ -15,6 +15,8 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+   List<String> _locations = ['A', 'B', 'C', 'D'];
+   String _selectedLocation='';
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -23,6 +25,9 @@ class _MapScreenState extends State<MapScreen> {
               apiService: ApiService())),
       builder: (context, child) {
         return Scaffold(
+          appBar: AppBar(
+            title: Text("${widget.latLong.lattitude} ${widget.latLong.longitude}"),
+          ),
           body: Consumer<MapViewModel>(
             builder: (context, viewModel, child) {
               return Center(
@@ -37,8 +42,7 @@ class _MapScreenState extends State<MapScreen> {
                           fontSize: 27,),),
                       ElevatedButton(
                         onPressed: () {
-                          context.read<MapViewModel>().fetchAddress(
-                              widget.latLong);
+                          context.read<MapViewModel>().fetchAddress(latLong: widget.latLong,kind: "house");
                         },
                         child: const Text("Map"),
                       ),

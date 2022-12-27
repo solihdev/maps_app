@@ -15,6 +15,7 @@ dependencies:
   provider: ^6.0.5
   json_serializable: ^6.5.4
   dio: ^4.0.6
+  dropdown_search: ^5.0.5
 
   #mapping packages
   location: ^4.4.0
