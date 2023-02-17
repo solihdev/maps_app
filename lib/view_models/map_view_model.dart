@@ -9,8 +9,9 @@ class MapViewModel extends ChangeNotifier {
 
   String addressText = '';
 
-  fetchAddress({required LatLong latLong, required String kind}) async {
-    addressText = await geoCodingRepository.getAddress(latLong, kind);
+  fetchAddress({required LocationModel latLong, required String kind}) async {
+    addressText =
+        await geoCodingRepository.getAddress(latLong,kind);
     notifyListeners();
   }
 }

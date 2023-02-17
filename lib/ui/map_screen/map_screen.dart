@@ -9,7 +9,7 @@ import '../../data/repositories/geocoding_repository.dart';
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key, required this.latLong}) : super(key: key);
 
-  final LatLong latLong;
+  final LocationModel latLong;
 
   @override
   State<MapScreen> createState() => _MapScreenState();

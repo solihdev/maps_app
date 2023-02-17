@@ -17,6 +17,9 @@ dependencies:
   dio: ^4.0.6
   dropdown_search: ^5.0.5
   lottie: ^2.1.0
+  workmanager: ^0.5.1
+  shared_preferences: ^2.0.17
+  logger: ^1.1.0
 
   #mapping packages
   location: ^4.4.0

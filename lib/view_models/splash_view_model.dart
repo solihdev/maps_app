@@ -8,7 +8,7 @@ class SplashViewModel extends ChangeNotifier {
     listenCurrentLocation();
   }
 
-  LatLong? latLong;
+  LocationModel? latLong;
 
   Location location = Location();
 
@@ -38,9 +38,9 @@ class SplashViewModel extends ChangeNotifier {
 
     //3-qadam lakatsiya oladi!
     _locationData = await location.getLocation();
-    latLong = LatLong(
+    latLong = LocationModel(
       lattitude: _locationData!.longitude!,
-      longitude: _locationData!.latitude!,
+      longitude: _locationData!.latitude!, dateTime: '',
     );
     notifyListeners();
     await Future.delayed(const Duration(seconds: 3));
