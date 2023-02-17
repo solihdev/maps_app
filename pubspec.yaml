@@ -20,6 +20,7 @@ dependencies:
   workmanager: ^0.5.1
   shared_preferences: ^2.0.17
   logger: ^1.1.0
+  sqflite: ^2.2.3
 
   #mapping packages
   location: ^4.4.0

@@ -4,7 +4,6 @@ import 'package:mapping_app/data/api_service/api_service.dart';
 import 'package:mapping_app/data/models/lat_long.dart';
 import 'package:mapping_app/data/repositories/geocoding_repository.dart';
 import 'package:mapping_app/ui/splash_screen/splash_screen.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -15,8 +14,11 @@ void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
-    await GeoCodingRepository(apiService: ApiService())
-        .getAddress(position as LocationModel, "");
+    await GeoCodingRepository().addLocation(LocationModel(
+      longitude: position.longitude,
+      lattitude: position.latitude,
+      dateTime: DateTime.now().toString(),
+    ));
     print("Location add");
     return Future.value(true);
   });
@@ -40,11 +42,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Mapping App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const soSplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
