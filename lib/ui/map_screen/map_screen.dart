@@ -4,7 +4,6 @@ import 'package:mapping_app/data/models/lat_long.dart';
 import 'package:mapping_app/ui/location_data/location_data.dart';
 import 'package:mapping_app/view_models/map_view_model.dart';
 import 'package:provider/provider.dart';
-import '../../data/api_service/api_service.dart';
 import '../../data/repositories/geocoding_repository.dart';
 
 class MapScreen extends StatefulWidget {
@@ -28,9 +27,7 @@ class _MapScreenState extends State<MapScreen> {
             IconButton(
                 icon: const Icon(Icons.refresh),
                 onPressed: () {
-                  context
-                      .read<MapViewModel>()
-                      .fetchAddress(latLong: widget.latLong);
+                  context.read<MapViewModel>();
                 }),
             IconButton(
               icon: const Icon(Icons.list),
@@ -44,38 +41,16 @@ class _MapScreenState extends State<MapScreen> {
           ]),
           body: Consumer<MapViewModel>(
             builder: (context, viewModel, child) {
-              return Center(
-                child: SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: 690,
-                        child: GoogleMap(
-                          mapType: MapType.hybrid,
-                          onMapCreated: (GoogleMapController controller) {},
-                          initialCameraPosition: CameraPosition(
-                              target: LatLng(widget.latLong.longitude,
-                                  widget.latLong.lattitude),
-                              zoom: 16),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          viewModel.addressText,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+              return SizedBox(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height - 85,
+                child: GoogleMap(
+                  mapType: MapType.hybrid,
+                  onMapCreated: (GoogleMapController controller) {},
+                  initialCameraPosition: CameraPosition(
+                      target: LatLng(
+                          widget.latLong.longitude, widget.latLong.lattitude),
+                      zoom: 16),
                 ),
               );
             },

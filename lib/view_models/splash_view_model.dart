@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:location/location.dart';
 import 'package:mapping_app/data/models/lat_long.dart';
+import 'package:mapping_app/data/repositories/geocoding_repository.dart';
 
 class SplashViewModel extends ChangeNotifier {
   SplashViewModel() {
@@ -40,7 +41,8 @@ class SplashViewModel extends ChangeNotifier {
     _locationData = await location.getLocation();
     latLong = LocationModel(
       lattitude: _locationData!.longitude!,
-      longitude: _locationData!.latitude!, dateTime: '',
+      longitude: _locationData!.latitude!,
+      dateTime: '',
     );
     notifyListeners();
     await Future.delayed(const Duration(seconds: 3));
@@ -48,6 +50,12 @@ class SplashViewModel extends ChangeNotifier {
 
   listenCurrentLocation() {
     location.onLocationChanged.listen((event) {
+      LocationModel locationModel = LocationModel(
+        longitude: event.longitude?.toDouble() ?? 0,
+        lattitude: event.latitude?.toDouble() ?? 0,
+        dateTime: DateTime.now().toString(),
+      );
+      GeoCodingRepository().addLocation(locationModel);
       print(
         "LOCATION CHANGED : ${event.longitude}, ${event.latitude}",
       );

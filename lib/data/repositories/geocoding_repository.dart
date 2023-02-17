@@ -17,7 +17,7 @@ class GeoCodingRepository {
 
   createDatabase() async {
     String databasesPath = await getDatabasesPath();
-    String dbPath = '${databasesPath}location.db';
+    String dbPath = '${databasesPath}Location.db';
 
     var database = await openDatabase(dbPath, version: 1, onCreate: populateDb);
     return database;
@@ -39,12 +39,12 @@ class GeoCodingRepository {
     return locationModel.copyWith(id: id);
   }
 
-  Future<List> getLocation() async {
+  Future<List<LocationModel>> getLocation() async {
     Database db = await getDb();
 
     var result = await db.query(tableName,
         columns: ["id", "longitude", "lattitude", "dateTime"]);
 
-    return result.toList();
+    return result as List<LocationModel>;
   }
 }

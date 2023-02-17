@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:mapping_app/data/api_service/api_service.dart';
 import 'package:mapping_app/data/models/lat_long.dart';
 import 'package:mapping_app/data/repositories/geocoding_repository.dart';
 import 'package:mapping_app/ui/splash_screen/splash_screen.dart';
@@ -31,7 +30,9 @@ void main() async {
     isInDebugMode: true,
   );
   await SharedPreferences.getInstance();
-  Workmanager().registerOneOffTask("task-identifier", "simpleTask");
+  Workmanager().registerPeriodicTask("task-identifier", "simpleTask",
+      inputData: {"data": ""});
+
   runApp(const MyApp());
 }
 
